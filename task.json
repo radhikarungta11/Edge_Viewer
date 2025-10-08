@@ -1,0 +1,12 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "g++ edge_detection.cpp -o edge_detection `pkg-config --cflags --libs opencv4`",
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}

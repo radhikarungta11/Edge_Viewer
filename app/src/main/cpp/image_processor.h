@@ -1,9 +1,8 @@
 #pragma once
-#include <vector>
+#include <jni.h>
 
-namespace ImageProcessor {
-    // Produces Android ARGB_8888 ints (A<<24 | R<<16 | G<<8 | B)
-    void nv21ToEdgesARGB(const unsigned char* nv21,
-                         int width, int height, int rotateDegrees,
-                         std::vector<int>& outARGB);
-}
+extern "C" JNIEXPORT void JNICALL
+Java_com_example_edgeviewer_NativeBridge_processYToRgba(
+    JNIEnv* env, jclass clazz,
+    jobject yPlane, jint width, jint height, jint rowStride,
+    jboolean doCanny, jobject outRgba);

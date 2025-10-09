@@ -1,4 +1,4 @@
-# 🧠 EdgeViewer 
+# 📸 EdgeViewer 
 
 A **Real-time edge detection viewer** demonstrating full-stack integration across:
 
@@ -22,6 +22,7 @@ A **Real-time edge detection viewer** demonstrating full-stack integration acros
 
 ## 🧩 Architecture
 
+```
 root
 ├── app/ # Android (Kotlin/Java) layer
 │ ├── MainActivity.kt # Camera setup & TextureView
@@ -48,6 +49,7 @@ root
 ├── tsconfig.json
 └── dist/
 
+```
 ---
 
 ### 🔄 Data Flow
@@ -60,7 +62,7 @@ root
 ---
 
 
-### Screenshots
+### 📸 Screenshots
 
 ![IMG_20230327_175846](https://github.com/user-attachments/assets/b11429e4-7c3c-410b-bb4f-f95faa6b1c87)
 
@@ -69,26 +71,25 @@ root
 <img width="2191" height="1180" alt="output" src="https://github.com/user-attachments/assets/ed4bf7b1-70fe-4227-9a01-791c4e99f90d" />
 
 
-
-
+---
 
 ## ⚙️ Setup Instructions
 
 ### 📱 Android Project Setup
 
-#### Requirements
+#### 📌Requirements
 
-- ✅Android Studio Giraffe+ / Koala
+-✅Android Studio Giraffe+ / Koala
 -✅Android NDK r26+
-- ✅OpenCV Android SDK (4.8.0+)
+-✅OpenCV Android SDK (4.8.0+)
 -✅CMake, LLDB
-- ✅Minimum SDK 24, Target SDK 34
+-✅Minimum SDK 24, Target SDK 34
 
-#### Steps
+#### 📌Steps
 1. Clone this repository:
 
-  -git clone https://github.com/<your-username>/EdgeViewer.git
-  - cd EdgeViewer
+-git clone https://github.com/<your-username>/EdgeViewer.git
+-cd EdgeViewer
    
 2. Extract and place OpenCV SDK under:
    
@@ -96,7 +97,7 @@ root
 
  4. Add this to your local.properties:
     
- -sdk.dir=C:\\Users\\<you>\\AppData\\Local\\Android\\Sdk
+-sdk.dir=C:\\Users\\<you>\\AppData\\Local\\Android\\Sdk
 -ndk.dir=C:\\Users\\<you>\\AppData\\Local\\Android\\Sdk\\ndk\\26.1.10909125
 
 5. Sync and build:
@@ -110,13 +111,15 @@ root
 -You should see a live camera feed with edge-detected output.
 
 
- # ✅ JNI Flow:
+ ## ✅ JNI Flow:
 
 -Java calls nativeProcessFrame(Mat input, Mat output)
 -C++ applies OpenCV filters
 -Output frame returned for OpenGL rendering
 
-# 🎨 Rendering with OpenGL ES
+---
+
+## 🎨 Rendering with OpenGL ES
 
 The GLRenderer:
 
@@ -125,25 +128,31 @@ The GLRenderer:
 -✅Draws frame using glDrawArrays(GL_TRIANGLE_STRIP, …)
 -✅Ensures ≥ 15 FPS on mid-range devices
 
-# 🌐 Web Viewer (TypeScript)
+---
 
-Located in /web/ — demonstrates the ability to visualize the processed frame on a browser.
+## 🌐 Web Viewer (TypeScript)
 
-# Features
+> Located in /web/ — demonstrates the ability to visualize the processed frame on a browser.
+---
+
+## Features
 
 -Displays a static sample image (Base64 / PNG)
 -Shows FPS and resolution overlay
 -Built with TypeScript, compiled via tsc
 
- # ✅Run
+---
+
+ ## ✅Run
 
 cd web
 npm install
 npm run build
 npx serve dist
 
+---
 
-✅ Features Implemented
+## ✅ Features Implemented
 
 -Android Camera Feed (Camera2 / TextureView)	✅
 -JNI Bridge (Java ↔ C++)	✅
@@ -152,11 +161,11 @@ npx serve dist
 -TypeScript Web Viewer	✅
 
 
-# 🧠 Architecture Summary
+# 🏗️ Architecture Summary
 
 >Core Pipeline:
 
-Camera Feed → JNI → OpenCV (C++) → OpenGL Renderer → Display
+> Camera Feed → JNI → OpenCV (C++) → OpenGL Renderer → Display
                                      ↓
                              Export → Web Viewer (TS)
 
@@ -165,15 +174,18 @@ Camera Feed → JNI → OpenCV (C++) → OpenGL Renderer → Display
 -✅OpenGL ES: Efficient texture rendering
 -✅TypeScript (Web): Visualization & debug interface
 
+---
 
-# 🧠 Author
+# 👤 Author
 
-RADHIKA RUNGTA
+**<span style="color:#00ADB5;">RADHIKA RUNGTA</span>**
 
-📧 radhikarungta61@gmail.com 
-🌐 https://github.com/radhikarungta11
+📧 [radhikarungta61@gmail.com](mailto:radhikarungta61@gmail.com)  
+🌐 [github.com/radhikarungta11](https://github.com/radhikarungta11)
+
 
 Built with ❤️ using Android Studio, NDK, OpenCV, OpenGL ES, and TypeScript.
+
 
 
 

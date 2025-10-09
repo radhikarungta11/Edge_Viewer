@@ -77,56 +77,52 @@ root
 
 ### 📱 Android Project Setup
 
-#### 📌Requirements
-
--✅Android Studio Giraffe+ / Koala
--✅Android NDK r26+
--✅OpenCV Android SDK (4.8.0+)
--✅CMake, LLDB
--✅Minimum SDK 24, Target SDK 34
+📌 **Requirements**
+- ✅ Android Studio Giraffe+ / Koala  
+- ✅ Android NDK r26+  
+- ✅ OpenCV Android SDK (4.8.0+)  
+- ✅ CMake, LLDB  
+- ✅ Minimum SDK 24, Target SDK 34  
 
 #### 📌Steps
-1. Clone this repository:
 
--git clone https://github.com/<your-username>/EdgeViewer.git
--cd EdgeViewer
+📥 **Clone this repository**
+- `git clone https://github.com/<your-username>/EdgeViewer.git`  
+- `cd EdgeViewer`
    
-2. Extract and place OpenCV SDK under:
+📥 Extract and place OpenCV SDK under:
    
-  - <project-root>/opencv/
+  <project-root>/opencv/
 
- 4. Add this to your local.properties:
-    
--sdk.dir=C:\\Users\\<you>\\AppData\\Local\\Android\\Sdk
--ndk.dir=C:\\Users\\<you>\\AppData\\Local\\Android\\Sdk\\ndk\\26.1.10909125
+  🛠️ **Add this to your `local.properties`:**
+- `sdk.dir=C:\Users\<your-username>\AppData\Local\Android\Sdk`  
+- `ndk.dir=C:\Users\<your-username>\AppData\Local\Android\Sdk\ndk\26.1.10909125`
 
-5. Sync and build:
+ 📥 Sync and build:
    
--File → Sync Project with Gradle Files
--Build → Rebuild Project
+File → Sync Project with Gradle Files
+Build → Rebuild Project
 
  #✅Run 
 
--Connect an Android device → tap Run ▶
--You should see a live camera feed with edge-detected output.
+>Connect an Android device → tap Run ▶
+>You should see a live camera feed with edge-detected output.
 
 
- ## ✅ JNI Flow:
-
--Java calls nativeProcessFrame(Mat input, Mat output)
--C++ applies OpenCV filters
--Output frame returned for OpenGL rendering
+ ### ✅ **JNI Flow**
+- Java calls `nativeProcessFrame(Mat input, Mat output)`  
+- C++ applies OpenCV filters  
+- Output frame returned for OpenGL rendering 
 
 ---
 
-## 🎨 Rendering with OpenGL ES
+### 🎨 **Rendering with OpenGL ES**
 
-The GLRenderer:
-
--✅Initializes vertex/fragment shaders
--✅Binds texture from processed image
--✅Draws frame using glDrawArrays(GL_TRIANGLE_STRIP, …)
--✅Ensures ≥ 15 FPS on mid-range devices
+The **GLRenderer**:  
+- ✅ Initializes vertex/fragment shaders  
+- ✅ Binds texture from processed image  
+- ✅ Draws frame using `glDrawArrays(GL_TRIANGLE_STRIP, …)`  
+- ✅ Ensures ≥ 15 FPS on mid-range devices 
 
 ---
 
@@ -135,30 +131,28 @@ The GLRenderer:
 > Located in /web/ — demonstrates the ability to visualize the processed frame on a browser.
 ---
 
-## Features
-
--Displays a static sample image (Base64 / PNG)
--Shows FPS and resolution overlay
--Built with TypeScript, compiled via tsc
-
----
-
- ## ✅Run
-
-cd web
-npm install
-npm run build
-npx serve dist
+### 🎨 **Features**
+- Displays a static sample image (Base64 / PNG)  
+- Shows FPS and resolution overlay  
+- Built with TypeScript, compiled via `tsc`  
 
 ---
 
-## ✅ Features Implemented
+ ### ✅ **Run**
+- ▢ `cd web`  
+- ▢ `npm install`  
+- ▢ `npm run build`  
+- ▢ `npx serve dist`  
 
--Android Camera Feed (Camera2 / TextureView)	✅
--JNI Bridge (Java ↔ C++)	✅
--OpenCV Canny Edge Detection	✅
--OpenGL ES 2.0 Texture Rendering	✅
--TypeScript Web Viewer	✅
+---
+
+### ✅ **Features Implemented**
+- Android Camera Feed (Camera2 / TextureView) ✅  
+- JNI Bridge (Java ↔ C++) ✅  
+- OpenCV Canny Edge Detection ✅  
+- OpenGL ES 2.0 Texture Rendering ✅  
+- TypeScript Web Viewer ✅  
+
 
 
 # 🏗️ Architecture Summary
@@ -169,10 +163,12 @@ npx serve dist
                                      ↓
                              Export → Web Viewer (TS)
 
--✅Android (Kotlin): Camera feed, JNI bridge, UI controls
--✅C++ (NDK): Image processing with OpenCV
--✅OpenGL ES: Efficient texture rendering
--✅TypeScript (Web): Visualization & debug interface
+### ✅ **Tech Stack Overview**
+
+- ✅ **Android (Kotlin):** Camera feed, JNI bridge, UI controls  
+- ✅ **C++ (NDK):** Image processing with OpenCV  
+- ✅ **OpenGL ES:** Efficient texture rendering  
+- ✅ **TypeScript (Web):** Visualization & debug interface  
 
 ---
 
@@ -185,6 +181,7 @@ npx serve dist
 
 
 Built with ❤️ using Android Studio, NDK, OpenCV, OpenGL ES, and TypeScript.
+
 
 
 

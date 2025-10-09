@@ -1,20 +1,11 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>EdgeViewer Web</title>
-  <style>
-    body { font-family: system-ui, sans-serif; margin: 24px; }
-    #img { max-width: 100%; border: 1px solid #ddd; }
-    .stat { margin-top: 8px; font-size: 14px; color: #555; }
-  </style>
-</head>
-<body>
-  <h1>EdgeViewer Web</h1>
-  <p>Shows a sample processed frame (base64) and stats.</p>
-  <img id="img" alt="Processed Frame"/>
-  <div class="stat" id="stats"></div>
-  <script type="module" src="./dist/main.js"></script>
-</body>
-</html>
+<!doctype html><html><head>
+<meta charset="utf-8" />
+<title>EdgeViewer Web</title>
+<style>body{font-family:system-ui;margin:24px}#stats{background:#eee;padding:8px 12px;display:inline-block}img{max-width:512px;display:block;margin-top:12px}</style>
+</head><body>
+<h1>EdgeViewer — Web Debug Viewer</h1>
+<div id="stats">FPS: <span id="fps">--</span> | Res: <span id="res">--</span></div>
+<img id="frame" alt="processed frame"/>
+<script type="module" src="./dist/main.js"></script>
+</body></html>
+

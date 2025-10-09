@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "module": "ES2015",
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "target": "ES2019",
+    "module": "ES6",
+    "outDir": "dist",
+    "rootDir": "src",
     "strict": true
   }
 }

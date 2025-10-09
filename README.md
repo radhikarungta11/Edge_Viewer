@@ -60,6 +60,18 @@ root
 ---
 
 
+### Screenshots
+
+![IMG_20230327_175846](https://github.com/user-attachments/assets/b11429e4-7c3c-410b-bb4f-f95faa6b1c87)
+
+![IMG-20250703-WA0038](https://github.com/user-attachments/assets/57e635bc-072e-4198-924c-8757d4d7cc1a)
+
+<img width="2191" height="1180" alt="output" src="https://github.com/user-attachments/assets/ed4bf7b1-70fe-4227-9a01-791c4e99f90d" />
+
+
+
+
+
 ## ⚙️ Setup Instructions
 
 ### 📱 Android Project Setup
@@ -162,6 +174,7 @@ RADHIKA RUNGTA
 🌐 https://github.com/radhikarungta11
 
 Built with ❤️ using Android Studio, NDK, OpenCV, OpenGL ES, and TypeScript.
+
 
 
 

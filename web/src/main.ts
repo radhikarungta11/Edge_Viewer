@@ -1,8 +1,15 @@
-const img = document.getElementById('img') as HTMLImageElement;
-const stats = document.getElementById('stats') as HTMLDivElement;
+const fpsEl = document.getElementById('fps')!;
+const resEl = document.getElementById('res')!;
+const imgEl = document.getElementById('frame') as HTMLImageElement;
 
-// 2x2 base64 PNG placeholder
-const base64Png = "iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAADUlEQVQImWNgoC/wHwAE4gJ3YwFJmQAAAABJRU5ErkJggg==";
+const sampleBase64 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAB...'; // replace with your Android-exported frame
+imgEl.src = sampleBase64;
+resEl.textContent = '1280x720';
 
-img.src = "data:image/png;base64," + base64Png;
-stats.textContent = `Resolution: 2x2 • FPS: static sample`;
+let frames = 0, last = performance.now();
+function tick(){
+  frames++; const now = performance.now();
+  if (now - last >= 1000){ fpsEl.textContent = String(frames); frames = 0; last = now; }
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);

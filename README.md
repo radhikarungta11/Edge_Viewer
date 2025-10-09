@@ -1,4 +1,4 @@
-🧠 EdgeViewer — Android + OpenCV (C++) + OpenGL ES + Web (TypeScript)
+#🧠 EdgeViewer — Android + OpenCV (C++) + OpenGL ES + Web (TypeScript)
 
 A **Real-time edge detection viewer** demonstrating full-stack integration across:
 - Android Camera feed (Camera2 / TextureView)
@@ -143,4 +143,5 @@ RADHIKA RUNGTA
 🌐 https://github.com/radhikarungta11
 
 Built with ❤️ using Android Studio, NDK, OpenCV, OpenGL ES, and TypeScript.
+
 

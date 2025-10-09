@@ -1,52 +1,45 @@
 #include "image_processor.h"
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
+#include <android/log.h>
+#include <cstring>
 
-
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,  "IMGPROC", __VA_ARGS__)
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, "IMGPROC", __VA_ARGS__)
 using namespace cv;
 
-static void nv21ToBgr(const unsigned char* nv21, int width, int height, cv::Mat& bgr) {
-    Mat yuv(height + height/2, width, CV_8UC1, (void*)nv21);
-    cv::cvtColor(yuv, bgr, cv::COLOR_YUV2BGR_NV21);
+static inline uint8_t* ptr(JNIEnv* env, jobject buf) {
+  return reinterpret_cast<uint8_t*>(env->GetDirectBufferAddress(buf));
 }
 
-namespace ImageProcessor {
+extern "C" JNIEXPORT void JNICALL
+Java_com_example_edgeviewer_NativeBridge_processYToRgba(
+    JNIEnv* env, jclass,
+    jobject yPlane, jint width, jint height, jint rowStride,
+    jboolean doCanny, jobject outRgba) {
 
-void nv21ToEdgesARGB(const unsigned char* nv21,
-                     int width, int height, int rotateDegrees,
-                     std::vector<int>& outARGB) {
-    Mat bgr;
-    nv21ToBgr(nv21, width, height, bgr);
+  if (!yPlane || !outRgba) return;
+  auto* yPtr   = ptr(env, yPlane);
+  auto* outPtr = ptr(env, outRgba);
+  if (!yPtr || !outPtr) return;
 
-    // Handle rotation from camera metadata
-    if (rotateDegrees == 90) {
-        cv::rotate(bgr, bgr, cv::ROTATE_90_CLOCKWISE);
-    } else if (rotateDegrees == 180) {
-        cv::rotate(bgr, bgr, cv::ROTATE_180);
-    } else if (rotateDegrees == 270) {
-        cv::rotate(bgr, bgr, cv::ROTATE_90_COUNTERCLOCKWISE);
-    }
+  // Wrap Y as a stride-aware Mat then compact to width
+  Mat yStrided(height, rowStride, CV_8UC1, yPtr);
+  Mat gray(height, width,   CV_8UC1);
+  for (int r = 0; r < height; ++r) {
+    memcpy(gray.ptr(r), yStrided.ptr(r), width);
+  }
 
-    Mat gray, blurred, edges;
-    cv::cvtColor(bgr, gray, cv::COLOR_BGR2GRAY);
-    cv::GaussianBlur(gray, blurred, Size(5,5), 1.5);
-    cv::Canny(blurred, edges, 80, 160);
+  Mat processed;
+  if (doCanny) {
+    Mat blurred;
+    GaussianBlur(gray, blurred, Size(5,5), 1.2);
+    Canny(blurred, processed, 80, 160);
+  } else {
+    processed = gray;
+  }
 
-    // RGBA image: white edges on black
-    Mat rgba(edges.size(), CV_8UC4, Scalar(0,0,0,255));
-    rgba.setTo(Scalar(0,0,0,255));
-    rgba.setTo(Scalar(255,255,255,255), edges);
-
-    // Pack into Android ARGB_8888 ints
-    outARGB.resize(rgba.rows * rgba.cols);
-    for (int y = 0; y < rgba.rows; ++y) {
-        const Vec4b* row = rgba.ptr<Vec4b>(y); // RGBA
-        for (int x = 0; x < rgba.cols; ++x) {
-            const Vec4b& p = row[x];
-            int a = p[3], r = p[0], g = p[1], b = p[2];
-            outARGB[y*rgba.cols + x] = (a<<24) | (r<<16) | (g<<8) | b;
-        }
-    }
+  Mat rgba;
+  cvtColor(processed, rgba, COLOR_GRAY2RGBA);
+  memcpy(outPtr, rgba.data, static_cast<size_t>(width) * height * 4);
 }
-
-} // namespace ImageProcessor

@@ -7,6 +7,7 @@ A **Real-time edge detection viewer** demonstrating full-stack integration acros
 - TypeScript web viewer for visual debug
   
 🚀 Overview
+
 **EdgeViewer** captures live camera frames, processes them in native C++ through **OpenCV**, applies **Canny edge detection**, and renders the processed frames in real-time using **OpenGL ES 2.0**.  
 A lightweight **TypeScript web viewer** displays a sample processed frame and FPS/resolution overlay.
 
@@ -142,3 +143,4 @@ RADHIKA RUNGTA
 🌐 https://github.com/radhikarungta11
 
 Built with ❤️ using Android Studio, NDK, OpenCV, OpenGL ES, and TypeScript.
+

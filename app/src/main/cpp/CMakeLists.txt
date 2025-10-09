@@ -1,30 +1,26 @@
-cmake_minimum_required(VERSION 3.22.1)
-project(edge_native)
-
+cmake_minimum_required(VERSION 3.18)
+project(image_processor)
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -DNDEBUG")
 
-add_library(edge_native SHARED
-    native-lib.cpp
-    image_processor.cpp
-)
+# Pass -DOpenCV_DIR=/path/to/OpenCV-android-sdk/sdk/native/jni from Gradle
+if(NOT DEFINED OpenCV_DIR)
+  message(WARNING "OpenCV_DIR not set; pass -DOpenCV_DIR=<...>/sdk/native/jni")
+endif()
+find_package(OpenCV REQUIRED)
+
+add_library(image_processor SHARED image_processor.cpp)
+target_include_directories(image_processor PRIVATE ${OpenCV_INCLUDE_DIRS})
 
 find_library(log-lib log)
 find_library(android-lib android)
+find_library(glesv2-lib GLESv2)
 find_library(jnigraphics-lib jnigraphics)
 
-# If building with local OpenCV Android SDK, set env var:
-#   OpenCV_DIR = <OpenCV-android-sdk>/sdk/native/jni
-if(DEFINED ENV{OpenCV_DIR})
-    set(OpenCV_DIR $ENV{OpenCV_DIR})
-endif()
-
-find_package(OpenCV REQUIRED core imgproc)
-
-if(NOT OpenCV_FOUND)
-    message(FATAL_ERROR "OpenCV not found. Set OpenCV_DIR to your OpenCV-android-sdk/sdk/native/jni")
-endif()
-
-include_directories(${OpenCV_INCLUDE_DIRS})
-
-target_link_libraries(edge_native ${OpenCV_LIBS} ${log-lib} ${android-lib} ${jnigraphics-lib})
+target_link_libraries(image_processor
+  ${OpenCV_LIBS}
+  ${log-lib}
+  ${jnigraphics-lib}
+  ${android-lib}
+  ${glesv2-lib}
+)
